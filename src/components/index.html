@@ -1,0 +1,92 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра хаоса</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <p class="sidebar__heading">Настройки</p>
+        <div class="sidebar__tabs" data-select="fix">
+            <p class="sidebar__tabs-item" data-option="fix">Фиксированные</p>
+            <p class="sidebar__tabs-item" data-option="arbitrary">Произвольные</p>
+        </div> 
+        <div class="sidebar__tabs-block" data-tab-menu="fix">
+            <p class="sidebar__note">Будет построен правильный треугольник</p>
+        </div>
+        <div class="sidebar__tabs-block" data-tab-menu="arbitrary">
+            <p class="sidebar__note">Поставьте произвольные точки на холсте</p>
+        </div>
+        <div class="sidebar__start-btn">НАЧАТЬ</div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth - 300;
+        let height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        let padding = 0;
+
+        width = width - padding;
+        height = height - padding;
+        
+    
+
+        let initialPoints = [
+            // {x: width / 2, y: padding},
+            // {x: width, y: height},
+            // {x: padding, y: height}
+        ];
+
+        const dist = Math.min(height, width) * .75 / 2;
+        for (let i = 0; i < 5; i++) {
+            const angle = (2 * Math.PI * i) / 5;
+            const x = +(width / 2 + Math.cos(angle) * dist).toFixed(2);
+            const y = +(height / 2 + Math.sin(angle) * dist).toFixed(2);
+            initialPoints.push({x, y});
+        }
+
+        let lastPoint = initialPoints[2];
+        
+
+
+
+        function randomPoint(arr = initialPoints) {
+            return arr[Math.floor(Math.random() * arr.length)]; 
+        }
+
+        function makeNextPoint(point) {
+            return {
+                x: lastPoint.x + (point.x - lastPoint.x) * 1.4,
+                y: lastPoint.y + (point.y - lastPoint.y) * 1.4
+            }
+        }
+
+        function drawPoint({x, y}) {
+            ctx.beginPath();
+            ctx.arc(x, y, 1, 0, 1 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        ctx.fillStyle = "red";
+        initialPoints.forEach(drawPoint)
+
+        // console.log(initialPoints[1], lastPoint);
+        // let np = makeNextPoint(initialPoints[1]);
+        // console.log('np', np);
+        // drawPoint(np);
+        
+        for(let i = 0; i < 1000000; i++) {
+            drawPoint(lastPoint);
+            lastPoint = makeNextPoint(randomPoint());
+        }
+
+    </script>
+</body>
+</html> -->
