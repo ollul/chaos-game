@@ -3,5 +3,6 @@
 Ссылка на игру: [Игра Хаос](https://ollul.github.io/chaos-game/dist/index.html "Игра Хаос")
 
 
+![](https://i.gifer.com/embedded/download/UWGO.gif "Треугольник Серпинского")
 
 
