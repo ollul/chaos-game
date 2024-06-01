@@ -2,4 +2,4 @@
 
 Ссылка на игру: [Игра Хаос](https://ollul.github.io/chaos-game/dist/index.html "Игра Хаос")
 
-![](https://imgur.com/82Yn5FA "Треугольник Серпинского")
+![](https://i.imgur.com/82Yn5FA.gif "Треугольник Серпинского")
