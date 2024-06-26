@@ -30,7 +30,14 @@ const App = () => {
   useEffect(() => {
     canvasRef.current?.setInitialPoints?.(points);
 }, [points])
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      canvasRef.current?.resize()
+    })
+  }, [])
   
+  console.log('rerender');
   return (<>
     <Sidebar setPoints={setPoints} setR={setR} r={r} status={status} onPause={handlePause} onReset={handleReset} onStart={handleStart} canvasRef={canvasRef}/>
     <Canvas points={points} r={r} ref={canvasRef}/>
