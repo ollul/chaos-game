@@ -16,6 +16,7 @@ const makePolygon = (points) => {
         const y = +(height / 2 + Math.sin(angle) * dist).toFixed(2);
         initialPoints.push({x, y});
     };
+    
     return initialPoints;
 }
 
@@ -71,9 +72,10 @@ const figures = [
 ];
 
 
-export const Sidebar = ({ setPoints, setR, status, onStart, onPause, onReset, canvasRef }) => {
+export const Sidebar = ({ setPoints, setR, status, onStart, onPause, onReset, canvasRef, r }) => {
     const [mod, setMod] = useState("fix");
     const [localR, setLocalR] = useState(0.5);
+    const [vertexCount, setVertexCount] = useState(2);
 
     const handleCanvasClick = useCallback((e) => {
         const point = {x: e.offsetX, y: e.offsetY};
@@ -95,6 +97,11 @@ export const Sidebar = ({ setPoints, setR, status, onStart, onPause, onReset, ca
     }
 
 
+    const handleChangeVertex = (e) => {
+        const vertex = parseInt(e.target.value);
+        setVertexCount(vertex);
+        setPoints(makePolygon(vertex));
+    }
 
     return (<div className="sidebar">
         <p className="sidebar__heading">Настройки</p>
@@ -104,6 +111,7 @@ export const Sidebar = ({ setPoints, setR, status, onStart, onPause, onReset, ca
         </div> 
         {
             mod === "fix" && (
+                <>
                 <div className="sidebar__figures">
                     {
                         figures.map(({makePoints, icon, r, title}, idx) => (<div 
@@ -112,7 +120,10 @@ export const Sidebar = ({ setPoints, setR, status, onStart, onPause, onReset, ca
                             title={title}
                             onClick={() => {
                                if(status === 'pending') {
-                                setPoints(makePoints())
+                                const points = makePoints();
+                                setPoints(points)
+                                setLocalR(r)
+                                setVertexCount(points.length)
                                 setR(r)
                                }
                             }}
@@ -121,6 +132,14 @@ export const Sidebar = ({ setPoints, setR, status, onStart, onPause, onReset, ca
                         </div>))
                     }
                 </div>
+                <div className="sidebar__custom">
+                    <div className="sidebar__custom-vertex">
+                        <label htmlFor="vertex">Количество вершин: {vertexCount}</label>
+                        <input type="range" value={vertexCount} onChange={handleChangeVertex} id="vertex" step={1} min={2} max={70}/>
+                    </div>
+                    <div className="sidebar__input-wrapper"><label htmlFor="r">R:</label> <input disabled={status !== 'pending'} onBlur={handleBlur} value={localR} onChange={e => setLocalR(e.target.value)} id="r" type="text" /></div>
+                </div>
+                </>
             )
         }
         {
