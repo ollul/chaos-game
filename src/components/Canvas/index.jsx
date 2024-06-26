@@ -32,6 +32,9 @@ export const Canvas = React.forwardRef((_, ref) => {
                 },
                 drawPoint(...args) {
                     chaos.current?.drawPoint(...args)
+                },
+                resize() {
+                    chaos.current?.resize();
                 }
             };
         },
