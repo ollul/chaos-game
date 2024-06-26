@@ -138,3 +138,18 @@
     background: #3f94de4f;
     color: #fff;
 }
+
+.sidebar__custom {
+    padding: 20px 5px 0px;
+}
+
+.sidebar__custom-vertex {
+    padding: 0 10px;
+}
+
+.sidebar__custom-vertex label {
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: monospace;
+}
